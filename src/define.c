@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "tokenizer.h"
 
-#define int LIMIT = 10;
-
 int space_char(char c){
   if(c == ' ' | c == '\n' | c == '\t'){
     return 1;
@@ -22,8 +20,9 @@ int non_space_char(char c){
 }
 
 char *word_start(char *str){
-  
-  for(int i = 0; i < LIMIT && i != '\n'; i++){
+
+int LIMIT = 10;
+  for(int i = 0; i < LIMIT; i++){
     if(non_space_char(*(str+i))){
       return str+i;
     }
@@ -32,7 +31,8 @@ char *word_start(char *str){
 
 char *word_end(char *str){
 
-  for(int i = 0; i < LIMIT && i != '\n'; i++){
+int LIMIT = 10;
+  for(int i = 0; i < LIMIT; i++){
     if(space_char(*(str+i))){
       return str+i;
     }
@@ -40,19 +40,13 @@ char *word_end(char *str){
 }
 
 int count_words(char *str){
-
-  
+  int LIMIT = 10;
   int counter = 0;
-  for(int i = 0; i < LIMIT && i != '\n'; i++){
-    if(word_end(str)){
-      counter++;
-    }
-    else if(*(word_end(str)+1))
-      
-    }
-
+  char *i;
+  i = str;
+  while(*word_end(i) != '\n'){
+    counter++;
+    i = word_end(word_start(i));
   }
+  return counter;
 }
-  
-}
-	
