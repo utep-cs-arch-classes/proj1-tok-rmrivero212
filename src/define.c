@@ -54,14 +54,27 @@ int count_words(char *str){
 
 char *copy_str(char *inStr, short len){
 
+  char *Str = (char*)malloc(len);
+  int i = 0;
   char c;
-  char *Str = (char *)malloc(len);
-  for(int i = 0; i < len - 1; i++){
-    Str = inStr;
+  while(*(inStr+i) != '\n' && i < len - 1){
+    c = *(inStr+i);
+    *(Str+i) = c;
+    i++;
   }
-  //  *(Str + 9) = '\n';
 
+  *(Str+(len - 1)) = '\n';
   return Str;
   
 }
+/*
+char **tokenize(char* str){
+ 
+  char **arr = (char**)malloc(sizeof(char*) * (count_words(str) + 1));
+  
+}
+*/
 
+int length(char *start, char *end){
+  return end - start;
+}
