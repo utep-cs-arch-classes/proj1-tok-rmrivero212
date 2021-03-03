@@ -22,7 +22,7 @@ int non_space_char(char c){
 
 char *word_start(char *str){
 
-int LIMIT = 10;
+int LIMIT = 100;
   for(int i = 0; i < LIMIT; i++){
     if(non_space_char(*(str+i))){
       return str+i;
@@ -32,23 +32,25 @@ int LIMIT = 10;
 
 char *word_end(char *str){
 
-int LIMIT = 10;
+int LIMIT = 100;
   for(int i = 0; i < LIMIT; i++){
-    if(space_char(*(str+i))){
+    if(space_char(*(str+i)) || *(str+i) == '\0' ){
       return str+i;
     }
   }
 }
 
 int count_words(char *str){
-  int LIMIT = 10;
   int counter = 0;
-  char *i;
-  i = str;
-  while(*word_end(i) != '\n'){
+  char *p;
+  p = str;
+  if(*word_start(p)){
     counter++;
-    i = word_end(word_start(i));
   }
+  while(*word_end(p) != '\0' && !word_start(word_end(word_start(p)))){
+    counter++;
+    p = word_end(word_start(p));
+   }
   return counter;
 }
 
@@ -57,7 +59,7 @@ char *copy_str(char *inStr, short len){
   char *Str = (char*)malloc(len);
   int i = 0;
   char c;
-  while(*(inStr+i) != '\n' && i < len - 1){
+  while(*(inStr+i) != '\0' && i < len - 1){
     c = *(inStr+i);
     *(Str+i) = c;
     i++;
@@ -77,11 +79,13 @@ char **tokenize(char* str){
   arr = (char**)malloc(sizeof(char*) * (count_words(str) + 1));
   char wordcount = count_words(str);
   int l;
-  int i = 0;
   char *x, *s;
   x = str;
 
-  
+
+  while(*word_end(x) != 0x0a){
+  }
+  /*
     while(i < wordcount){
       l = len( word_start(x), word_end(x));
       s = copy_str(x, l + 1);
@@ -89,7 +93,7 @@ char **tokenize(char* str){
       i++;
       x = word_end(word_start(x));
     }
-  
+  */
     arr[wordcount + 1] = 0;
 
     return arr;
