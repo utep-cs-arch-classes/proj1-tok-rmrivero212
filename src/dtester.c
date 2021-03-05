@@ -5,19 +5,17 @@ int len(char *start, char *end);
 
 int main(){
 
-  char s[100] = " hey man ";
+  char s[100] = "hello there guys";
   char *str;
   str = s;
-  int i = 0;
  
    printf("Count words: %d\n", count_words(str));
 
    printf("len: %d\n", len(word_start(str), word_end(word_start(str))));
-  /*
-  printf("copy_str: %s\n", copy_str(str, 3+1));
+  
+   printf("copy_str: %s\n", copy_str(str, len(word_start(str), word_end(word_start(str)))));
 
- char **arr = tokenize(str);
-  print_tokens(arr);
+   print_tokens(tokenize(str));
+  
 }
-  */
-}
+
