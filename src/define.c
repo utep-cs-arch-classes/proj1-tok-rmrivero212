@@ -80,42 +80,33 @@ char **tokenize(char* str){
   arr = (char**)malloc(sizeof(char*) * (count_words(str) + 1));
   char wordcount = count_words(str);
   int position = 0;
-  char *c;
+  char *x;
   int length = len(word_start(str), word_end(word_start(str)));
 
   for(int position = 0; position < wordcount; position++){
     
-    c = copy_str(word_start(str), length);
-    arr[position] = c;
-    length = len(word_start(str), word_end(str));
-    str = word_end(word_start(str));
+    arr[position] = copy_str(str, length);
+
+    length = len(word_start(word_end(word_start(str))), word_end(word_start(word_end(word_start(str)))));
+    str = word_start(word_end(word_start(str)));
   }
-  /*
-  while(position < wordcount){
-    c = copy_str(str, length);
-    arr[position] = c;
-    position++;
-    str = word_start(word_end(str));
-    length = len(word_start(str), word_end(word_start(str)));
-  }
-  */
+  
     arr[wordcount] = '\0';
 
     return arr;
 }
 
 void print_tokens(char **tokens){
-  int i = 0;
-  while(**(tokens+i) != '\0'){
-    printf("%s\n", *tokens+i);
-    i++;
+  while(*tokens != NULL){
+    printf("%s\n", *tokens);
+    tokens++;
   }
 }
 
 void free_tokens(char **tokens){
   int i = 0;
-  while(**(tokens+i)){
+  while(*tokens != NULL){
     free(tokens);
-    i++;
+    tokens++;
   }
 }
