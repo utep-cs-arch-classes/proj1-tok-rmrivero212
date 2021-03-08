@@ -10,19 +10,54 @@ List* init_history(){
 }
 
 void add_history(List *list, char *str){
+  
   Item *root = list->root;
-  int newID = root->id;
-  root->id = newID++;
-  root->str = str;
-  root->next = (Item*) malloc(sizeof(Item) * 1);
+  Item *newRoot = (Item*) malloc(sizeof(Item) * 1);
+  int newID = 0;
+
+  if(list->root == NULL){
+    newRoot->id = newID;
+    newRoot->str = str;
+    newRoot->next = NULL;
+    root == newRoot;
+    return;
+  }
+  
+  while(root->next != NULL){
+    root = root->next;
+    newID++;
+  }
+  
+  newRoot->id = newID;
+  newRoot->str = str;
+  newRoot->next = NULL;
+
+  root->next = newRoot;
+  
 }
 
 char *get_history(List *list, int id){
   Item *root = list->root;
+  while(root->str != NULL){
   if(root->id == id){
     return root->str;
   }
-  else{
+    root = root->next;
+  }
+}
+
+void print_history(List *list){
+  Item *root = list->root;
+  while(root->str != NULL){
+    printf("!%d: %s\n", root->id, root->str);
+    root = root->next;
+  }
+}
+
+void free_history(List *list){
+  Item *root = list->root;
+  while(root->str != NULL){
+    free(root->str);
     root = root->next;
   }
 }
