@@ -13,13 +13,13 @@ void add_history(List *list, char *str){
   
   Item *root = list->root;
   Item *newRoot = (Item*) malloc(sizeof(Item) * 1);
-  int newID = 0;
+  int newID = 1;
 
-  if(list->root == NULL){
-    newRoot->id = newID;
-    newRoot->str = str;
-    newRoot->next = NULL;
-    root == newRoot;
+  if(root->str == NULL){
+    newID = 0;
+    root->id = newID;
+    root->str = str;
+    root->next = NULL;
     return;
   }
   
@@ -48,7 +48,11 @@ char *get_history(List *list, int id){
 
 void print_history(List *list){
   Item *root = list->root;
-  while(root->str != NULL){
+  if(root->str == NULL){
+    printf("No History\n");
+    return;
+  }
+  while(root != NULL){
     printf("!%d: %s\n", root->id, root->str);
     root = root->next;
   }
@@ -56,7 +60,7 @@ void print_history(List *list){
 
 void free_history(List *list){
   Item *root = list->root;
-  while(root->str != NULL){
+  while(root != NULL){
     free(root->str);
     root = root->next;
   }
