@@ -5,35 +5,31 @@
 
 void main(){
 
-  //char *str;
-  int c, h;
-  int i = 0;
-  List *list = init_history();
-
-  while(1){
-  printf("> ");
   char *str;
-  str = (char*)malloc(100);
-  while((c = getchar())){
-    if(c == '\n'){
-      break;
+  List *list = init_history();
+  int i = 0;
+  int esc = 0;
+  do{
+    printf("> ");
+    str = (char*)malloc(sizeof(char) * 100);
+    char c;
+    while((c = getchar()) != '\n'){
+      
+    if(c == '$'){
+      printf("Good bye!\n");
+      esc = 1;
     }
     if(c == '!'){
       print_history(list);
-      printf("!");
-      h = getchar();
     }
     *(str+i) = c;
     i++;
-      
+    
+    }
+    add_history(list, str);
+    print_tokens(tokenize(str));
+    
   }
-  print_tokens(tokenize(str));
-  add_history(list, str);
-  free(str);
-	/*
-	print_tokens(tokenize(str));
-	add_history(list, str);
-	*/
-  }
+  while(esc == 0);
 }
 

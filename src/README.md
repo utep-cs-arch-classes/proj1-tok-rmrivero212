@@ -7,13 +7,16 @@ follows:
 - Type make in command line to create the gui file 
 - Then run the file like so: ./gui
 
+To exit the progam simply type `$` and an exit message will appear:
+- > $ 	    //This is the user input
+- Goodbye!  //This is the exit message
+
 Once in the Tokenizer you will see a cursor `>`. This is the command line
 where you have the freedom to write any sort of prompt in which the program
 will return back in tokens. For example:
 - > hello world //This is the user input
 _ hello	  	//This is what is printed
-  world		//This is what is printed
-  > 
+- world		//This is what is printed 
 
 # History Instructions:
 
@@ -22,4 +25,4 @@ inputs starting from !0 to !N(N being the amount of lines the user has input)
 For Example:
 - > !			//The `!` symbol is passed through the input line
 - !0 hello world      	//This is what is printed
-  !1 how are you?	//This is what is printed
+- !1 how are you?	//This is what is printed
