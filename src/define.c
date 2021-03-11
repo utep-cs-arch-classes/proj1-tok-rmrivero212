@@ -47,9 +47,18 @@ int count_words(char *str){
   start = word_start(str);
   
   if(*start != 0){
-    counter++;
-    while(*word_end(p) != '\0' && word_start(word_end(word_start(p)))){
-      counter++;
+    while(word_end(word_start(p))){
+      if(*word_end(word_start(p)) == '\0'){
+	counter++;
+	break;
+      }
+      if(*word_end(word_start(p)) == ' ' && word_start(word_end(word_start(p)))){
+	counter++;
+      }
+      
+      if(*word_start(word_end(word_start(p))) == '\0'){
+      counter--;
+    }
       p = word_start(word_end(word_start(p)));
     }
   }
@@ -59,11 +68,13 @@ int count_words(char *str){
 char *copy_str(char *inStr, short len){
 
   char *Str = (char*)malloc(len + 1);
+  char *p;
+  p = word_start(inStr);
   int i = 0;
   char c;
   
   while(i < len){
-    c = *(inStr+i);
+    c = *(p+i);
     *(Str+i) = c;
     i++;
   }

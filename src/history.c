@@ -38,7 +38,7 @@ void add_history(List *list, char *str){
 
 char *get_history(List *list, int id){
   Item *root = list->root;
-  while(root->str != NULL){
+  while(root != NULL){
   if(root->id == id){
     return root->str;
   }
